@@ -121,7 +121,7 @@ controller.left.onEvent(ControllerButtonEvent.Pressed, function () {
 })
 info.onCountdownEnd(function () {
     if (info.life() != 0) {
-        scene.cameraShake(8, 500)
+        scene.cameraShake(7, 500)
         info.changeLifeBy(-1)
         info.startCountdown(10)
     }
@@ -424,11 +424,20 @@ controller.menu.onEvent(ControllerButtonEvent.Pressed, function () {
     }
 })
 info.onLifeZero(function () {
-    if (info.highScore() < info.score()) {
-        game.gameOver(true)
-    } else {
-        game.gameOver(false)
+    game.setGameOverMessage(true, "JUST MISSED")
+    game.setGameOverEffect(true, effects.slash)
+    game.setGameOverPlayable(true, music.melodyPlayable(music.pewPew), false)
+    if (info.highScore() > info.score()) {
+        game.setGameOverMessage(true, "GAME OVER")
+        game.setGameOverEffect(true, effects.melt)
+        game.setGameOverPlayable(true, music.melodyPlayable(music.wawawawaa), false)
+    } else if (info.highScore() < info.score()) {
+        game.setGameOverMessage(true, "YOU WIN")
+        game.setGameOverEffect(true, effects.confetti)
+        game.setGameOverPlayable(true, music.melodyPlayable(music.powerUp), false)
     }
+    game.setGameOverScoringType(game.ScoringType.HighScore)
+    game.gameOver(true)
 })
 function startLevel () {
     scene.setBackgroundColor(randint(2, 12))
@@ -692,6 +701,7 @@ scene.setBackgroundImage(img`
     4444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444
     4444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444444
     `)
+info.setScore(0)
 info.setLife(3)
 player2.setStayInScreen(true)
 controller.moveSprite(player2, 70, 70)
