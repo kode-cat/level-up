@@ -5,13 +5,8 @@
         "device": "*",
         "multiplayer": "*",
         "animation": "*",
-        "corgio": "*",
         "controller": "*",
-        "darts": "*",
-        "sprite-scaling": "*",
-        "browser-events": "*",
-        "color-coded-tilemap": "*",
-        "radio-broadcast": "*"
+        "sprite-scaling": "*"
     },
     "files": [
         "main.blocks",
